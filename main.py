@@ -19,19 +19,6 @@ from googlesearch import search
 
 
 #def
-def who(author , statmnt , authorlist , statmntlist):
-  #this program opens and writes the needed things in memname.txt and saying.txt
-  statmntlist.append(statmnt)
-  authorlist.append(author)
-  deviant = 'Í∏åÇ„'.join(statmntlist)
-  deviant_author = ' '.join(authorlist)
-  deviant1 = open('memname.txt','w')
-  deviant1.write(deviant_author)
-  deviant1.close()
-  deviant2 = open('saying.txt','w')
-  deviant2.write(deviant)
-  deviant2.close()
-
 def color():
   #this program choose colors for the embed randomly
   color = (0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63
@@ -85,15 +72,8 @@ elif data["Prefix"] == None:
   print("pls enter the prefix")
   exit()
 
-memid1 = open('memname.txt','r')
-memid = memid1.read().split()
-memid1.close()
-sayong = open('saying.txt','r')
-saying = sayong.read().split('Í∏åÇ„')
-sayong.close()
-dictionary = {}
-for i in range(len(memid)):
-  dictionary[memid[i]] = saying[i]
+with open("who_is.json","r") as dicti:
+    dictionary = json.load(dicti)
 
 
 try:
@@ -411,15 +391,15 @@ async def who_is_set(ctx,*,what_to_say = None):
       embed = discord.Embed(title="Who is set", description=".who_is_set <your apithet>", color=color())
       await ctx.send(embed=embed)
     else:
-      dictionary[f'{str(ctx.author.id)}'] = what_to_say
-      try:
-        intas = memid.index(str(ctx.author.id))
-        memid.pop(intas)
-        saying.pop(intas)
-        print(who(str(ctx.author.id),what_to_say,memid , saying))
-      except:
-        print(who(str(ctx.author.id),what_to_say,memid , saying))
-
+      if str(ctx.author.id) in dictionary.keys():
+          del dictionary[str(ctx.author.id)]
+          dictionary[str(ctx.author.id)] = what_to_say
+          with open("who_is.json","w") as who_s:
+              json.dump(dictionary,who_s,indent = 4)
+      else:
+          dictionary[str(ctx.author.id)] = what_to_say
+          with open("who_is.json","w") as who_s:
+              json.dump(dictionary,who_s,indent = 4)
       await ctx.send(f'{ctx.author.name}#{ctx.author.discriminator} your who_is statement has been added')
 
 #this * is kept so that the program knows to take every word behind it
