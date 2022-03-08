@@ -437,10 +437,16 @@ async def mute_role(ctx,role:discord.Role = None):
     if role == None:
       embed = discord.Embed(title="Set Mute Role", description="mute_role <role>", color=color())
       await ctx.send(embed =embed)
-    else:
-      Mute_roles[str(ctx.guild.id)] =f"{role}"
-      with open("mute_role.json","w") as mr:
-        json.dump(Mute_roles , mr , indent = 4)
+  else:
+      if str(ctx.guild.id) in Mute_roles.keys():
+          del Mute_roles[str(ctx.guild.id)]
+          Mute_roles[str(ctx.guild.id)] =f"{role}"
+          with open("mute_role.json","w") as mr:
+              json.dump(Mute_roles , mr , indent = 4)
+      else:
+          Mute_roles[str(ctx.guild.id)] =f"{role}"
+          with open("mute_role.json","w") as mr:
+              json.dump(Mute_roles , mr , indent = 4)
       await ctx.send(f"{role} has been set as the Mute role for this server")
 
 #keep_alive()
