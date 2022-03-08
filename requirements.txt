@@ -5,4 +5,3 @@ google==3.0.0
 requests==2.26.0
 wikipedia==1.4.0
 python-dotenv==0.19.1
-async-timeout==3.0.1
