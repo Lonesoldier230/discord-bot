@@ -6,8 +6,3 @@ requests==2.26.0
 wikipedia==1.4.0
 python-dotenv==0.19.1
 async-timeout==3.0.1
-click==8.0.3
-Jinja2==3.0.3
-itsdangerous==2.0.1
-click==8.0.3
-Werkzeug==2.0.2
