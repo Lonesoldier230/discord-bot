@@ -93,18 +93,18 @@ client = commands.Bot(command_prefix=data['Prefix'])
 @client.command()
 async def help(ctx):
   embed = discord.Embed(title="Help", color= color())
-  embed.add_field(name="Kick",value = "```.kick <member> <reason>```",inline = True)
-  embed.add_field(name="Ban",value = "```.ban <member> <reason>```",inline = True)
-  embed.add_field(name="Unban",value = "```.unban <member#1234>```",inline = True)
-  embed.add_field(name="Mute",value = "```.mute <member>```",inline = True)
-  embed.add_field(name="Unmute",value = "```.unmute <member>```",inline = True)
-  embed.add_field(name="Role",value = "```.role <member> <role>```",inline = True)
-  embed.add_field(name='Insult',value = "```.insult <member>```",inline = True)
-  embed.add_field(name='Random',value = "```.rand <max number>```",inline = True)
-  embed.add_field(name='Who is set',value = "```.who_is_set <your apithet>```",inline = True)
-  embed.add_field(name='Who is',value = "```.whois <user>```",inline = True)
-  embed.add_field(name='Wikipedia',value = "```.wiki or wikipedia <your question>```",inline = True)
-  embed.add_field(name='Google',value = "```.google or search <your question>```",inline = True)
+  embed.add_field(name="Kick",value = "`.kick <member> <reason>`",inline = True)
+  embed.add_field(name="Ban",value = "`.ban <member> <reason>`",inline = True)
+  embed.add_field(name="Unban",value = "`.unban <member#1234>`",inline = True)
+  embed.add_field(name="Mute",value = "`.mute <member>`",inline = True)
+  embed.add_field(name="Unmute",value = "`.unmute <member>`",inline = True)
+  embed.add_field(name="Role",value = "`.role <member> <role>`",inline = True)
+  embed.add_field(name='Insult',value = "`.insult <member>`",inline = True)
+  embed.add_field(name='Random',value = "`.rand <max number>`",inline = True)
+  embed.add_field(name='Who is set',value = "`.who_is_set <your apithet>`",inline = True)
+  embed.add_field(name='Who is',value = "`.whois <user>`",inline = True)
+  embed.add_field(name='Wikipedia',value = "`.wiki or wikipedia <your question>`",inline = True)
+  embed.add_field(name='Google',value = "`.google or search <your question>`",inline = True)
   await ctx.send(embed=embed)
 
 #this loads the config file
@@ -167,7 +167,7 @@ async def _8ball(ctx, *, questions=None):
 async def kick(ctx, user: discord.Member = None, *, reason=None):
   if data["kick_settings"]["kick"] == True:
     if user == None:
-      embed = discord.Embed(title="Kick", description="```.kick <user> <reason>```", color=color())
+      embed = discord.Embed(title="Kick", description="`.kick <user> <reason>`", color=color())
       await ctx.send(embed=embed)
     else:
       if user.id == ctx.guild.me.id:
@@ -188,7 +188,7 @@ async def kick(ctx, user: discord.Member = None, *, reason=None):
 async def ban(ctx, user: discord.Member = None, *, reason=None):
   if data["ban_settings"]["ban"] == True:
     if user == None:
-      embed = discord.Embed(title="Ban", description="```.ban <user> <reason>```", color=color())
+      embed = discord.Embed(title="Ban", description="`.ban <user> <reason>`", color=color())
       await ctx.send(embed=embed)
     else:
       if user.id == ctx.guild.me.id:
@@ -209,7 +209,7 @@ async def ban(ctx, user: discord.Member = None, *, reason=None):
 async def unban(ctx, *, member=None):
   if data["unban_settings"]["unban"] == True:
     if member == None:
-      embed = discord.Embed(title="Unban", description="```.unban <user>```", color=color())
+      embed = discord.Embed(title="Unban", description="`.unban <user>`", color=color())
       await ctx.send(embed=embed)
     else:
       banned_user = await ctx.guild.bans()
@@ -225,7 +225,7 @@ async def unban(ctx, *, member=None):
 async def role(ctx, user: discord.Member = None, * ,role: discord.Role = None):
   if data["role_settings"]["role"] ==True:
     if user == None or role == None:
-      embed = discord.Embed(title="Role", description="```.role <user> <role>```", color=color())
+      embed = discord.Embed(title="Role", description="`.role <user> <role>`", color=color())
       await ctx.send(embed=embed)
     else:
       if ctx.author.top_role > role and ctx.guild.me.top_role > role:
@@ -273,7 +273,7 @@ async def mute(ctx, user: discord.Member = None, time:str = "None", *, reason=No
     try:
       stc = Mute_roles[str(ctx.guild.id)]
       if user == None:
-        embed = discord.Embed(title="Mute", description="```.mute <user>```", color=color())
+        embed = discord.Embed(title="Mute", description="`.mute <user>`", color=color())
         await ctx.send(embed=embed)
       else:
         Mute_rol = (discord.utils.get(user.guild.roles, name=f"{Mute_roles[str(ctx.guild.id)]}"))
@@ -334,7 +334,7 @@ async def unmute(ctx, user: discord.Member = None):
       else:
         await ctx.send("sorry there was an error while executing the command")
     else:
-      embed = discord.Embed(title="Unmute", description="```.unmute <user>```", color=color())
+      embed = discord.Embed(title="Unmute", description="`.unmute <user>`", color=color())
       await ctx.send(embed=embed)
 
 @client.command()
@@ -342,7 +342,7 @@ async def insult(ctx , user:discord.Member = None):
   #reminder user.id is a integer not a string
   if user == None:
     #note dont forget to user await ctx.send(embed =embed) if u are making an embed
-    embed = discord.Embed(title="Insult", description="```.insult <user>```", color=color())
+    embed = discord.Embed(title="Insult", description="`.insult <user>`", color=color())
     await ctx.send(embed = embed)
   elif user.id == 755247492601348227:
     await ctx.send('goto hell I am not inulting him')
@@ -353,7 +353,7 @@ async def insult(ctx , user:discord.Member = None):
 async def who_is(ctx , user:discord.Member = None):
   if data["who_is"] == True:
     if user == None:
-      embed = discord.Embed(title="Who is", description="```.who_is <user>```", color=color())
+      embed = discord.Embed(title="Who is", description="`.who_is <user>`", color=color())
       await ctx.send(embed=embed)
     else:
       said = ('is','is the','is one of the')
@@ -370,7 +370,7 @@ async def rand(ctx , num = None):
   if data["randomn"] == True:
     try:
       if num == None:
-        embed = discord.Embed(title="random", description="```.random <max number>```", color=color())
+        embed = discord.Embed(title="random", description="`.random <max number>`", color=color())
         await ctx.send(embed=embed)
       else:
           num = int(num)
@@ -382,7 +382,7 @@ async def rand(ctx , num = None):
 async def who_is_set(ctx,*,what_to_say = None):
   if data["who_is"] == True:
     if what_to_say == None:
-      embed = discord.Embed(title="Who is set", description="```.who_is_set <your apithet>```", color=color())
+      embed = discord.Embed(title="Who is set", description="`.who_is_set <your apithet>`", color=color())
       await ctx.send(embed=embed)
     else:
       if str(ctx.author.id) in dictionary.keys():
@@ -401,7 +401,7 @@ async def who_is_set(ctx,*,what_to_say = None):
 async def _what(ctx, *, question = None):
   if data["wikipedia"] == True:
     if question == None:
-      embed = discord.Embed(title="Wikipedia", description="```.wiki,wikipedia <your question>```", color=color())
+      embed = discord.Embed(title="Wikipedia", description="`.wiki,wikipedia <your question>`", color=color())
       await ctx.send(embed =embed)
     else:
       try:
@@ -413,7 +413,7 @@ async def _what(ctx, *, question = None):
 async def _google(ctx,*,query = None):
   if data["google_search"] == True:
     if query == None:
-      embed = discord.Embed(title="Google", description="```.google,search <your question>```", color=color())
+      embed = discord.Embed(title="Google", description="`.google,search <your question>`", color=color())
       await ctx.send(embed =embed)
     else:
       if query.lower() in gogle.keys():
@@ -429,7 +429,7 @@ async def _google(ctx,*,query = None):
 async def mute_role(ctx,role:discord.Role = None):
   if data["mute_settings"]["mute"] == True:
     if role == None:
-      embed = discord.Embed(title="Set Mute Role", description="```mute_role <role>```", color=color())
+      embed = discord.Embed(title="Set Mute Role", description="`mute_role <role>`", color=color())
       await ctx.send(embed =embed)
     else:
       if str(ctx.guild.id) in Mute_roles.keys():
