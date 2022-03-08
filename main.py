@@ -1,4 +1,4 @@
-#made by Sherwin Maharjan aka Lone_soldier230
+#made Lone_soldier230
 #import
 import random
 from discord.ext import commands,tasks
@@ -64,7 +64,7 @@ for i in range(3):
       print(configurater[i])
       time.sleep(60)
     else:
-      print("""how many mistakes can you make idiot 
+      print("""how many mistakes can you make idiot
 figure that json file out and come and start this again""")
       exit()
 
@@ -304,8 +304,8 @@ async def mute(ctx, user: discord.Member = None, time:str = "None", *, reason=No
         if user.id == ctx.guild.me.id:
           await ctx.send("why are you trying to mute me")
         else:
-            if ctx.author.top_role > user.top_role and ctx.guild.me.top_role > user.top_role:  
-              if time != "None":        
+            if ctx.author.top_role > user.top_role and ctx.guild.me.top_role > user.top_role:
+              if time != "None":
                 for t in timing.keys():
                   if t in time:
                     try:
@@ -338,7 +338,7 @@ async def mute(ctx, user: discord.Member = None, time:str = "None", *, reason=No
     except KeyError as jsd:
       embed = discord.Embed(title="Error", description=":x: couldnt find the Muted role pls set a Mute role using .mute_role", color=color())
       await ctx.send(embed=embed)
-    
+
 @client.command()
 @commands.has_permissions(manage_roles=True)
 async def unmute(ctx, user: discord.Member = None):
@@ -454,7 +454,7 @@ async def _google(ctx,*,query = None):
 @client.command()
 async def mute_role(ctx,role:discord.Role = None):
   if data["mute_settings"]["mute"] == True:
-    if role == None: 
+    if role == None:
       embed = discord.Embed(title="Set Mute Role", description="mute_role <role>", color=color())
       await ctx.send(embed =embed)
     else:
