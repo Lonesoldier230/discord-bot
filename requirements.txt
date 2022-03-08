@@ -1,1 +1,1 @@
-json ,discord ,os ,requests ,wikipedia ,asyncio ,time
+google==3.0.0
