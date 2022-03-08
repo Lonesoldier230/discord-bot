@@ -1,0 +1,53 @@
+{
+    "TOKEN": null,
+    "Prefix": null,
+    "8ball": true,
+    "Custom_commands": {
+        "hello": "hi how are you"
+    },
+    "kick_settings": {
+        "kick": true,
+        "text": "[admin] kicked [member]"
+    },
+    "ban_settings": {
+        "ban": true,
+        "text": "[admin] banned [member]"
+    },
+    "unban_settings": {
+        "unban": true,
+        "text": "[admin] unbanned [member]"
+    },
+    "role_settings": {
+        "role": true,
+        "text": "[admin] has roled [member]"
+    },
+    "unrole_settings": {
+        "unrole": true,
+        "text": "[admin] has unroled [member]"
+    },
+    "mute_settings": {
+        "mute": true,
+        "text": "[member] has been muted by [admin]"
+    },
+    "unmute_settings": {
+        "unmute": true,
+        "text": "[member] has been unmuted by [admin]"
+    },
+    "insult": [
+        "people clap when they see you.They clap their hands over their eyes.",
+        "you are proof that god has a sense of humour.",
+        "you sir are the reason god created the middle finger."
+    ],
+    "who_is": true,
+    "randomn": true,
+    "wikipedia": true,
+    "google_search": true,
+    "banned_words": [
+        "fuck",
+        "bitch"
+    ],
+    "banned_sites": [
+        "https://www.pornhub",
+        "https://xhamster"
+    ]
+}
