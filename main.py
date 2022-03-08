@@ -167,8 +167,7 @@ async def _8ball(ctx, *, questions=None):
 async def kick(ctx, user: discord.Member = None, *, reason=None):
   if data["kick_settings"]["kick"] == True:
     if user == None:
-      embed = discord.Embed(
-          title="Kick", description=".kick <user> <reason>", color=color())
+      embed = discord.Embed(title="Kick", description=".kick <user> <reason>", color=color())
       await ctx.send(embed=embed)
     else:
       if user.id == ctx.guild.me.id:
@@ -189,8 +188,7 @@ async def kick(ctx, user: discord.Member = None, *, reason=None):
 async def ban(ctx, user: discord.Member = None, *, reason=None):
   if data["ban_settings"]["ban"] == True:
     if user == None:
-      embed = discord.Embed(
-          title="Ban", description=".ban <user> <reason>", color=color())
+      embed = discord.Embed(title="Ban", description=".ban <user> <reason>", color=color())
       await ctx.send(embed=embed)
     else:
       if user.id == ctx.guild.me.id:
@@ -211,8 +209,7 @@ async def ban(ctx, user: discord.Member = None, *, reason=None):
 async def unban(ctx, *, member=None):
   if data["unban_settings"]["unban"] == True:
     if member == None:
-      embed = discord.Embed(
-          title="Unban", description=".unban <user>", color=color())
+      embed = discord.Embed(title="Unban", description=".unban <user>", color=color())
       await ctx.send(embed=embed)
     else:
       banned_user = await ctx.guild.bans()
@@ -228,8 +225,7 @@ async def unban(ctx, *, member=None):
 async def role(ctx, user: discord.Member = None, * ,role: discord.Role = None):
   if data["role_settings"]["role"] ==True:
     if user == None or role == None:
-      embed = discord.Embed(
-          title="Role", description=".role <user> <role>", color=color())
+      embed = discord.Embed(title="Role", description=".role <user> <role>", color=color())
       await ctx.send(embed=embed)
     else:
       if ctx.author.top_role > role and ctx.guild.me.top_role > role:
@@ -338,8 +334,7 @@ async def unmute(ctx, user: discord.Member = None):
       else:
         await ctx.send("sorry there was an error while executing the command")
     else:
-      embed = discord.Embed(
-          title="Unmute", description=".unmute <user>", color=color())
+      embed = discord.Embed(title="Unmute", description=".unmute <user>", color=color())
       await ctx.send(embed=embed)
 
 @client.command()
@@ -375,8 +370,7 @@ async def rand(ctx , num = None):
   if data["randomn"] == True:
     try:
       if num == None:
-        embed = discord.Embed(
-            title="random", description=".random <max number>", color=color())
+        embed = discord.Embed(title="random", description=".random <max number>", color=color())
         await ctx.send(embed=embed)
       else:
           num = int(num)
