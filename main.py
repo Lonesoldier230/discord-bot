@@ -437,7 +437,7 @@ async def mute_role(ctx,role:discord.Role = None):
     if role == None:
       embed = discord.Embed(title="Set Mute Role", description="mute_role <role>", color=color())
       await ctx.send(embed =embed)
-  else:
+    else:
       if str(ctx.guild.id) in Mute_roles.keys():
           del Mute_roles[str(ctx.guild.id)]
           Mute_roles[str(ctx.guild.id)] =f"{role}"
