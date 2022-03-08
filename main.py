@@ -1,4 +1,4 @@
-#made Lone_soldier230
+#made by Lone_soldier230
 #import
 import random
 from discord.ext import commands,tasks
