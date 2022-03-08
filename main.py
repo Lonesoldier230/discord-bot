@@ -273,7 +273,6 @@ async def role(ctx, user: discord.Member = None, * ,role: discord.Role = None):
 @commands.has_permissions(manage_roles=True)
 async def mute(ctx, user: discord.Member = None, time:str = "None", *, reason=None):
   timing = {"s":1,"second":1,"seconds":1,"m":60 , "minute":60,"minutes":60 , "h":3600,"hour":3600 , "hours":3600, "d":86400,"day":86400,"days":86400}
-  Mute_rol = (discord.utils.get(user.guild.roles, name=f"{Mute_roles[str(ctx.guild.id)]}"))
   if data["mute_settings"]["mute"] == True:
     try:
       stc = Mute_roles[str(ctx.guild.id)]
@@ -281,6 +280,7 @@ async def mute(ctx, user: discord.Member = None, time:str = "None", *, reason=No
         embed = discord.Embed(title="Mute", description=".mute <user>", color=color())
         await ctx.send(embed=embed)
       else:
+        Mute_rol = (discord.utils.get(user.guild.roles, name=f"{Mute_roles[str(ctx.guild.id)]}"))
         if user.id == ctx.guild.me.id:
           await ctx.send("why are you trying to mute me")
         else:
