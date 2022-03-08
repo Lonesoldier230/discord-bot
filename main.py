@@ -13,8 +13,8 @@ import asyncio
 from json.decoder import JSONDecodeError
 import time
 from googlesearch import search
-from dotenv import load_dotenv
-load_dotenv
+#from dotenv import load_dotenv
+#load_dotenv
 #from keep_alive import keep_alive
 
 
@@ -450,5 +450,5 @@ async def mute_role(ctx,role:discord.Role = None):
       await ctx.send(f"{role} has been set as the Mute role for this server")
 
 #keep_alive()
-client.run(os.getenv("TOKEN"))
-#client.run(data["TOKEN"])
+#client.run(os.getenv("TOKEN"))
+client.run(data["TOKEN"])
