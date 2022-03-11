@@ -91,20 +91,27 @@ client = commands.Bot(command_prefix=data['Prefix'])
 #body
 @client.remove_command('help')
 @client.command()
-async def help(ctx):
+async def help(ctx,cate = None):
   embed = discord.Embed(title="Help", color= color())
-  embed.add_field(name="Kick",value = "`.kick <member> <reason>`",inline = True)
-  embed.add_field(name="Ban",value = "`.ban <member> <reason>`",inline = True)
-  embed.add_field(name="Unban",value = "`.unban <member#1234>`",inline = True)
-  embed.add_field(name="Mute",value = "`.mute <member>`",inline = True)
-  embed.add_field(name="Unmute",value = "`.unmute <member>`",inline = True)
-  embed.add_field(name="Role",value = "`.role <member> <role>`",inline = True)
-  embed.add_field(name='Insult',value = "`.insult <member>`",inline = True)
-  embed.add_field(name='Random',value = "`.rand <max number>`",inline = True)
-  embed.add_field(name='Who is set',value = "`.who_is_set <your apithet>`",inline = True)
-  embed.add_field(name='Who is',value = "`.whois <user>`",inline = True)
-  embed.add_field(name='Wikipedia',value = "`.wiki or wikipedia <your question>`",inline = True)
-  embed.add_field(name='Google',value = "`.google or search <your question>`",inline = True)
+  if cate == None:
+    embed.add_field(name = "Moderator", value = "`.help moderator`", inline = False)
+    embed.add_field(name="Search", value="`.help search`", inline=False)
+    embed.add_field(name="Fun", value="`.help fun`", inline=False)
+  elif cate == "moderator":
+    embed.add_field(name="Kick",value = "`.kick <member> <reason>`",inline = False)
+    embed.add_field(name="Ban",value = "`.ban <member> <reason>`",inline = False)
+    embed.add_field(name="Unban",value = "`.unban <member#1234>`",inline = False)
+    embed.add_field(name="Mute",value = "`.mute <member>`",inline = False)
+    embed.add_field(name="Unmute",value = "`.unmute <member>`",inline = False)
+    embed.add_field(name="Role",value = "`.role <member> <role>`",inline = False)
+  elif cate == "fun":
+    embed.add_field(name='Insult',value = "`.insult <member>`",inline = False)
+    embed.add_field(name='Random',value = "`.rand <max number>`",inline = False)
+    embed.add_field(name='Who is set',value = "`.who_is_set <your apithet>`",inline = False)
+    embed.add_field(name='Who is',value = "`.whois <user>`",inline = False)
+  elif cate == "search":
+    embed.add_field(name='Wikipedia',value = "`.wiki or wikipedia <your question>`",inline = False)
+    embed.add_field(name='Google',value = "`.google or search <your question>`",inline = False)
   await ctx.send(embed=embed)
 
 #this loads the config file
