@@ -98,6 +98,7 @@ async def help(ctx,cate = None):
     embed.add_field(name = "Moderator", value = f"`{prefi}help moderator/mod/commands`", inline = False)
     embed.add_field(name="Search", value=f"`{prefi}help search/look/google`", inline=False)
     embed.add_field(name="Fun", value=f"`{prefi}help fun`", inline=False)
+    await ctx.send(embed=embed)
   elif cate == "moderator" or cate == "mod" or cate == "commands":
     embed.add_field(name="Kick",value = f"`{prefi}kick <member> <reason>`",inline = False)
     embed.add_field(name="Ban",value = f"`{prefi}ban <member> <reason>`",inline = False)
@@ -105,15 +106,17 @@ async def help(ctx,cate = None):
     embed.add_field(name="Mute",value = f"`{prefi}mute <member>`",inline = False)
     embed.add_field(name="Unmute",value = f"`{prefi}unmute <member>`",inline = False)
     embed.add_field(name="Role",value = f"`{prefi}role <member> <role>`",inline = False)
+    await ctx.send(embed=embed)
   elif cate == "fun":
     embed.add_field(name='Insult',value = f"`{prefi}insult <member>`",inline = False)
     embed.add_field(name='Random',value = f"`{prefi}rand <max number>`",inline = False)
     embed.add_field(name='Who is set',value = f"`{prefi}who_is_set <your apithet>`",inline = False)
     embed.add_field(name='Who is',value = f"`{prefi}whois <user>`",inline = False)
+    await ctx.send(embed=embed)
   elif cate == "search" or cate == "look" or cate ==  "google":
-    embed.add_field(name='Wikipedia',value = f"`{prefi}wiki or wikipedia <your question>`",inline = False)
-    embed.add_field(name='Google',value = f"`{prefi}google or search <your question>`",inline = False)
-  await ctx.send(embed=embed)
+    embed.add_field(name='Wikipedia',value = f"`{prefi}wiki/wikipedia <your question>`",inline = False)
+    embed.add_field(name='Google',value = f"`{prefi}google/search <your question>`",inline = False)
+    await ctx.send(embed=embed)
 
 #this loads the config file
 @client.command()
