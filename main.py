@@ -14,7 +14,7 @@ from json.decoder import JSONDecodeError
 import time
 from googlesearch import search
 #from dotenv import load_dotenv
-#load_dotenv
+#load_dotenv()
 #from keep_alive import keep_alive
 
 
