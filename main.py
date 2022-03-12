@@ -94,10 +94,10 @@ client = commands.Bot(command_prefix=data['Prefix'])
 async def help(ctx,cate = None):
   embed = discord.Embed(title="Help", color= color())
   if cate == None:
-    embed.add_field(name = "Moderator", value = "`.help moderator`", inline = False)
-    embed.add_field(name="Search", value="`.help search`", inline=False)
+    embed.add_field(name = "Moderator", value = "`.help moderator/mod/commands`", inline = False)
+    embed.add_field(name="Search", value="`.help search/look/google`", inline=False)
     embed.add_field(name="Fun", value="`.help fun`", inline=False)
-  elif cate == "moderator":
+  elif cate == "moderator" or "mod" or "commands":
     embed.add_field(name="Kick",value = "`.kick <member> <reason>`",inline = False)
     embed.add_field(name="Ban",value = "`.ban <member> <reason>`",inline = False)
     embed.add_field(name="Unban",value = "`.unban <member#1234>`",inline = False)
@@ -109,7 +109,7 @@ async def help(ctx,cate = None):
     embed.add_field(name='Random',value = "`.rand <max number>`",inline = False)
     embed.add_field(name='Who is set',value = "`.who_is_set <your apithet>`",inline = False)
     embed.add_field(name='Who is',value = "`.whois <user>`",inline = False)
-  elif cate == "search":
+  elif cate == "search" or "look" or "google":
     embed.add_field(name='Wikipedia',value = "`.wiki or wikipedia <your question>`",inline = False)
     embed.add_field(name='Google',value = "`.google or search <your question>`",inline = False)
   await ctx.send(embed=embed)
@@ -408,7 +408,7 @@ async def who_is_set(ctx,*,what_to_say = None):
 async def _what(ctx, *, question = None):
   if data["wikipedia"] == True:
     if question == None:
-      embed = discord.Embed(title="Wikipedia", description="`.wiki,wikipedia <your question>`", color=color())
+      embed = discord.Embed(title="Wikipedia", description="`.wiki/wikipedia <your question>`", color=color())
       await ctx.send(embed =embed)
     else:
       try:
@@ -420,7 +420,7 @@ async def _what(ctx, *, question = None):
 async def _google(ctx,*,query = None):
   if data["google_search"] == True:
     if query == None:
-      embed = discord.Embed(title="Google", description="`.google,search <your question>`", color=color())
+      embed = discord.Embed(title="Google", description="`.google/search <your question>`", color=color())
       await ctx.send(embed =embed)
     else:
       if query.lower() in gogle.keys():
