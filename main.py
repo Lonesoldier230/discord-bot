@@ -425,7 +425,7 @@ async def _google(ctx,*,query = None):
       await ctx.send(embed =embed)
     else:
       if query.lower() in gogle.keys():
-        await ctx.send(f"your answer is in {gogle[query]} check it out")
+        await ctx.send(f"your answer is in {gogle[query.lower()]} check it out")
       else:
         for ans in search(query , tld="co.in",num = 1 , stop = 1 , pause = 2):
           await ctx.send(f"your answer is in {ans} check it out")
