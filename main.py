@@ -43,7 +43,7 @@ os.chdir(paths)
 for i in range(3):
   configurater = {0:"you made an error in main.json you have 60 seconds",1:"can you check main.json again you have 60 seconds"}
   try:
-    with open('main.json','r') as js:
+    with open('./storage/main.json','r') as js:
       data = json.load(js)
       break
   except JSONDecodeError as e:
@@ -61,7 +61,7 @@ if data.keys() == backup_data.keys():
   print("Verified...")
 else:
   backup_data.update(data)
-  with open('main.json', 'w') as hson:
+  with open('./storage/main.json', 'w') as hson:
     json.dump(backup_data, hson, indent=4)
     data = dict(backup_data)
 
@@ -72,17 +72,17 @@ elif data["Prefix"] == None:
   print("pls enter the prefix")
   exit()
 
-with open("who_is.json","r") as dicti:
+with open("./storage/who_is.json","r") as dicti:
     dictionary = json.load(dicti)
 
 
 try:
-  with open("mute_role.json" , "r") as mrj:
+  with open("./storage/mute_role.json" , "r") as mrj:
     Mute_roles = json.load(mrj)
 except:
   print("hey dont mess with mute_role.json")
 
-with open("google.json","r") as goog:
+with open("./storage/google.json","r") as goog:
   gogle = json.load(goog)
 
 
@@ -404,11 +404,11 @@ async def who_is_set(ctx,*,what_to_say = None):
       if str(ctx.author.id) in dictionary.keys():
           del dictionary[str(ctx.author.id)]
           dictionary[str(ctx.author.id)] = what_to_say
-          with open("who_is.json","w") as who_s:
+          with open("./storage/who_is.json","w") as who_s:
               json.dump(dictionary,who_s,indent = 4)
       else:
           dictionary[str(ctx.author.id)] = what_to_say
-          with open("who_is.json","w") as who_s:
+          with open("./storage/who_is.json","w") as who_s:
               json.dump(dictionary,who_s,indent = 4)
       await ctx.send(f'{ctx.author.name}#{ctx.author.discriminator} your who_is statement has been added')
 
@@ -438,7 +438,7 @@ async def _google(ctx,*,query = None):
         for ans in search(query , tld="co.in",num = 1 , stop = 1 , pause = 2):
           await ctx.send(f"your answer is in {ans} check it out")
           gogle[query.lower()] = f"{ans}"
-          with open("google.json","w") as g:
+          with open("./storage/google.json","w") as g:
             json.dump(gogle , g , indent = 4)
 
 @client.command()
@@ -451,11 +451,11 @@ async def mute_role(ctx,role:discord.Role = None):
       if str(ctx.guild.id) in Mute_roles.keys():
           del Mute_roles[str(ctx.guild.id)]
           Mute_roles[str(ctx.guild.id)] =f"{role}"
-          with open("mute_role.json","w") as mr:
+          with open("./storage/mute_role.json","w") as mr:
               json.dump(Mute_roles , mr , indent = 4)
       else:
           Mute_roles[str(ctx.guild.id)] =f"{role}"
-          with open("mute_role.json","w") as mr:
+          with open("./storage/mute_role.json","w") as mr:
               json.dump(Mute_roles , mr , indent = 4)
       await ctx.send(f"{role} has been set as the Mute role for this server")
 
