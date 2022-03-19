@@ -382,7 +382,7 @@ async def rand(ctx , num = None):
     try:
       try:
         assert num > 0
-        assert x < 999999
+        assert x < 9999999
         if num == None:
           embed = discord.Embed(title="random", description=f"`{prefi}random <max number>`", color=color())
           await ctx.send(embed=embed)
