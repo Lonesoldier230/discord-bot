@@ -380,12 +380,17 @@ async def who_is(ctx , user:discord.Member = None):
 async def rand(ctx , num = None):
   if data["randomn"] == True:
     try:
-      if num == None:
-        embed = discord.Embed(title="random", description=f"`{prefi}random <max number>`", color=color())
-        await ctx.send(embed=embed)
-      else:
-          num = int(num)
-          await ctx.send(f'I choose {random.randint(1,num)}')
+      try:
+        assert num > 0
+        assert x < 999999
+        if num == None:
+          embed = discord.Embed(title="random", description=f"`{prefi}random <max number>`", color=color())
+          await ctx.send(embed=embed)
+        else:
+            num = int(num)
+            await ctx.send(f'I choose {random.randint(1,num)}')
+      except AssertionError:
+        await ctx.send("please enter a positive number")
     except:
       await ctx.send('sorry I am having some problem pls check if you entered a number')
 
