@@ -388,7 +388,7 @@ async def rand(ctx , num = None):
           await ctx.send(embed=embed)
         else:
             num = int(num)
-            await ctx.send(f'I choose {random.randint(1,num)}')
+            await ctx.send(f'I choose {random.randint(0,num)}')
       except AssertionError:
         await ctx.send("please enter a positive number")
     except:
