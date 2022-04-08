@@ -382,7 +382,7 @@ async def rand(ctx , num = None):
     try:
       try:
         assert num > 0
-        assert x < 9999999
+        assert num < 9999999999
         if num == None:
           embed = discord.Embed(title="random", description=f"`{prefi}random <max number>`", color=color())
           await ctx.send(embed=embed)
@@ -390,7 +390,7 @@ async def rand(ctx , num = None):
             num = int(num)
             await ctx.send(f'I choose {random.randint(0,num)}')
       except AssertionError:
-        await ctx.send("please enter a positive number")
+        await ctx.send("please enter a valid number")
     except:
       await ctx.send('sorry I am having some problem pls check if you entered a number')
 
