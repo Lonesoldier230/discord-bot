@@ -33,7 +33,7 @@ backup_data = {"TOKEN":None,"Prefix": None, "8ball": True, "Custom_commands": {"
     , "you sir are the reason god created the middle finger."], "who_is": True, "randomn": True, "wikipedia": True,"google_search" : True,"banned_words":[""],"banned_sites":[""]}
 
 #most essential program it finds where this file is located and changes dir here
-path1 = path.__file__.replace('path.py', '')
+path1 = __file__.replace('main.py', '')
 paths = os.path.join(path1)
 os.chdir(paths)
 
