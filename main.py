@@ -5,7 +5,6 @@ from discord.ext import commands,tasks
 from discord import channel
 import discord
 import os
-import path
 import requests
 import wikipedia
 import json

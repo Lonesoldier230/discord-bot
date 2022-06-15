@@ -1,8 +1,9 @@
 import json
 import discord
 from discord.ext import commands
+path = __file__.replace("/cogs/cogs.py","")
 
-with open('main.json', 'r') as js:
+with open(f'{path}/storage/main.json', 'r') as js:
   data = json.load(js)
 class Example(commands.Cog):
 
