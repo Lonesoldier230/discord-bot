@@ -1,6 +1,5 @@
 {
     "TOKEN": null,
-    "Prefix": null,
     "8ball": true,
     "Custom_commands": {
         "hello": "hi how are you"

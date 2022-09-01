@@ -1,19 +1,22 @@
 import json
-import discord
-from discord.ext import commands
+import disnake
+from disnake.ext import commands
 path = __file__.replace("/cogs/cogs.py","")
 
 with open(f'{path}/storage/main.json', 'r') as js:
   data = json.load(js)
+  
 class Example(commands.Cog):
 
   def __init__(self, client):
     self.client = client
-
+    
+  @commands.slash_command(description="hello")
+  async def cogs_check(ctx:disnake.ApplicationCommandInteraction):
+    await ctx.response.send_message("it works")
+    
   @commands.Cog.listener()
   async def on_message(self, message):
-
-#emblem and test server here
     try:
       if message.guild.id != 0:
         #Custom commands
@@ -25,7 +28,7 @@ class Example(commands.Cog):
             for n in message.content.split():
               if n.startswith(i) or n.endswith(i):
                 await message.channel.send(f'{message.author.name}#{message.author.discriminator} you have been warned for sending explicit content,ip grabbers or onion sites link')
-                await message.author.add_roles(discord.utils.get(message.author.guild.roles, name='Muted'))
+                await message.author.add_roles(disnake.utils.get(message.author.guild.roles, name='Muted'))
                 await message.delete()
                 break           
         #Bad words prevention
