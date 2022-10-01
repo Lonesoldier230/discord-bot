@@ -16,24 +16,34 @@ def search(type,name):
         r = json.loads(response.text)
         for n in r["data"]:
             for i in n["genres"]:
-                a.append(i["name"])
+                if i not in a:
+                    a.append(i["name"])
             title = n["title"]
             top_search[title] = {}
-            top_search[title]["genre"] = ",".join(shortner(".".join(a)))
+            if a != None:
+                top_search[title]["genre"] = ",".join(shortner(".".join(a)))
+            else:
+                top_search[title]["genre"] = None 
             top_search[title]["id"] = n["mal_id"]
             top_search[title]["url"] = n["url"]
             top_search[title]["synopsis"] = n["synopsis"]
             top_search[title]["image"]=n["images"]["jpg"]["image_url"]
+            top_search[title]["rank"] = n["rank"]
+            top_search[title]["episodes"] = n["episodes"]
+            top_search[title]["score"] = n["score"]
         return top_search
     else:
         return "Error"
     
 def shortner(paragraph):
-    a = paragraph.split('.')
-    if len(a) > 5:
-        return a[0:5]
-    else:
-        return a
+    if paragraph == None:
+        return None
+    else: 
+        a = paragraph.split('.')
+        if len(a) > 5:
+            return a[0:5]
+        else:
+            return a
 
 class Anime(commands.Cog):
     def __init__(self,client):
@@ -49,12 +59,18 @@ class Anime(commands.Cog):
         select_menu = disnake.ui.Select(options=options,placeholder="Results")
         manga_id = result[a]["id"]
         url = result[a]["url"]
-        synopsis = ".".join(shortner(result[a]["synopsis"]))
-        
+        if result[a]["synopsis"] != None:
+            synopsis = ".".join(shortner(result[a]["synopsis"]))
+        else:
+            synopsis = None
+            
         embed = disnake.Embed(title=a, url= url, color=0xFF5733)
         embed.set_thumbnail(url = result[a]["image"])
-        embed.add_field(name = "Genre", value = result[a]["genre"])
-        embed.add_field(name="Synopsis", value=synopsis, inline=False)
+        embed.add_field(name=":regional_indicator_g: Genre",value=result[a]["genre"], inline=False)
+        embed.add_field(name=":100: Score", value=result[a]["score"], inline=True)
+        embed.add_field(name=":trophy: Rank",value=result[a]["rank"], inline=True)
+        embed.add_field(name=":play_pause: Episodes",value=result[a]["episodes"], inline=True)
+        embed.add_field(name=":scroll: Synopsis", value=synopsis, inline=False)
         embed.set_footer(text = f"#{manga_id}")
         
         async def calback(interaction):
@@ -64,12 +80,18 @@ class Anime(commands.Cog):
                 f"https://api.jikan.moe/v4/manga/{manga_id}/full")
             result1 = json.loads(result1.text)
             url = result[nam]["url"]
-            synopsis = ".".join(shortner(result[nam]["synopsis"]))
-            
+            if result[nam]["synopsis"] != None:
+                synopsis = ".".join(shortner(result[nam]["synopsis"]))
+            else:
+                synopsis = None
+                
             embed = disnake.Embed(title=nam, url=url, color=0xFF5733)
             embed.set_thumbnail(url=result[nam]["image"])
-            embed.add_field(name="Genre", value=result[nam]["genre"])
-            embed.add_field(name="Synopsis", value=synopsis, inline=False)
+            embed.add_field(name=":regional_indicator_g: Genre", value=result[nam]["genre"],inline=False)
+            embed.add_field(name = ":100: Score",value= result[nam]["score"],inline=True)
+            embed.add_field(name=":trophy: Rank",value=result[nam]["rank"], inline=True)
+            embed.add_field(name=":play_pause: Episodes",value= result[nam]["episodes"],inline=True)
+            embed.add_field(name=":scroll: Synopsis", value=synopsis, inline=False)
             embed.set_footer(text = f"#{manga_id}")
             await interaction.response.edit_message(embed=embed, view=view)
             
@@ -88,25 +110,38 @@ class Anime(commands.Cog):
         select_menu = disnake.ui.Select(options=options, placeholder="Results")
         anime_id = result[a]["id"]
         url = result[a]["url"]
-        synopsis = ".".join(shortner(result[a]["synopsis"]))
+        if result[a]["synopsis"] != None:
+            synopsis = ".".join(shortner(result[a]["synopsis"]))
+        else:
+            synopsis = None
         
         embed = disnake.Embed(
             title=a, url=url, color=0xFF5733)
         embed.set_thumbnail(url=result[a]["image"])
-        embed.add_field(name="Genre", value=result[a]["genre"],inline=False)
-        embed.add_field(name="Synopsis",value = synopsis,inline=False)
+        embed.add_field(name=":regional_indicator_g: Genre", value=result[a]["genre"],inline=False)
+        embed.add_field(name=":100: Score",value=result[a]["score"], inline=True)
+        embed.add_field(name=":trophy: Rank",value=result[a]["rank"], inline=True)
+        embed.add_field(name=":play_pause: Episodes",value=result[a]["episodes"], inline=True)
+        embed.add_field(name=":scroll: Synopsis",value = synopsis,inline=False)
         embed.set_footer(text=f"#{anime_id}")
 
         async def calback(interaction):
             nam = select_menu.values[0]
             anime_id = result[nam]["id"]
             url = result[nam]["url"]
-            synopsis = ".".join(shortner(result[nam]["synopsis"]))        
+            if result[nam]["synopsis"] != None:
+                synopsis = ".".join(shortner(result[nam]["synopsis"]))  
+            else:
+                synopsis = None
+                  
             embed = disnake.Embed(title=nam, url=url, color=0xFF5733)
             embed.set_thumbnail(
                 url=result[nam]["image"])
-            embed.add_field(name="Genre", value=result[nam]["genre"])
-            embed.add_field(name="Synopsis", value=synopsis, inline=False)
+            embed.add_field(name=":regional_indicator_g: Genre", value=result[nam]["genre"],inline=False)
+            embed.add_field(name=":100: Score", value=result[nam]["score"], inline=True)
+            embed.add_field(name=":trophy:Rank",value=result[nam]["rank"], inline=True)
+            embed.add_field(name=":play_pause: Episodes",value=result[nam]["episodes"], inline=True)
+            embed.add_field(name=":scroll: Synopsis", value=synopsis, inline=False)
             embed.set_footer(text=f"#{anime_id}")
             await interaction.response.edit_message(embed=embed, view=view)
             
