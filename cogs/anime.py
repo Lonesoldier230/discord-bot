@@ -33,7 +33,7 @@ def search(type,name):
             top_search[title]["score"] = n["score"]
         return top_search
     else:
-        return "Error"
+        raise ValueError
     
 def shortner(paragraph):
     if paragraph == None:
