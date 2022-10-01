@@ -3,13 +3,21 @@ from disnake.ext import commands
 import requests
 import json
 
-def search(type,name):
+def search(type,name=None):
     if type == "anime":
+        querystring = {"q": name, "limit": 10}
         url = "https://api.jikan.moe/v4/anime"
+        response = requests.get(url=url, params=querystring)
     elif type == "manga":
+        querystring = {"q": name, "limit": 10}
         url = "https://api.jikan.moe/v4/manga"
-    querystring = {"q": name, "limit": 10}
-    response = requests.get(url=url, params=querystring)
+        response = requests.get(url=url, params=querystring)
+    elif type == "topanime":
+        url = "https://api.jikan.moe/v4/top/anime"
+        response = requests.get(url= url)
+    elif type == "topmanga":
+        url = "https://api.jikan.moe/v4/top/manga"
+        response = requests.get(url = url)
     if response.status_code == 200:
         a = []
         top_search = {}
@@ -29,7 +37,8 @@ def search(type,name):
             top_search[title]["synopsis"] = n["synopsis"]
             top_search[title]["image"]=n["images"]["jpg"]["image_url"]
             top_search[title]["rank"] = n["rank"]
-            top_search[title]["episodes"] = n["episodes"]
+            if type == "anime" or type == "topanime":
+                top_search[title]["episodes"] = n["episodes"]
             top_search[title]["score"] = n["score"]
         return top_search
     else:
@@ -45,7 +54,7 @@ def shortner(paragraph):
         else:
             return a
 
-def embeder(result,name):
+def embeder(result,name,type=None):
     id = result[name]["id"]
     url = result[name]["url"]
     if result[name]["synopsis"] != None:
@@ -57,7 +66,8 @@ def embeder(result,name):
     embed.add_field(name=":regional_indicator_g: Genre",value=result[name]["genre"], inline=False)
     embed.add_field(name=":100: Score", value=result[name]["score"], inline=True)
     embed.add_field(name=":trophy: Rank",value=result[name]["rank"], inline=True)
-    embed.add_field(name=":play_pause: Episodes",value=result[name]["episodes"], inline=True)
+    if type == "anime":
+        embed.add_field(name=":play_pause: Episodes",value=result[name]["episodes"], inline=True)
     embed.add_field(name=":scroll: Synopsis",value=synopsis, inline=False)
     embed.set_footer(text=f"#{id}")
     return embed
@@ -94,13 +104,53 @@ class Anime(commands.Cog):
             options.append(disnake.SelectOption(label=n))
         a = list(result.keys())[0]
         select_menu = disnake.ui.Select(options=options, placeholder="Results")
+        embed = embeder(result, a,"anime")
+
+        async def calback(interaction):
+            nam = select_menu.values[0]
+            embed = embeder(result, nam,"anime")
+            await interaction.response.edit_message(embed=embed, view=view)
+            
+        select_menu.callback = calback
+        view = disnake.ui.View()
+        view.add_item(select_menu)
+        await ctx.send(embed=embed, view=view)
+        
+    @commands.slash_command(description="Search the top Anime")
+    async def top_anime(ctx: disnake.ApplicationCommandInteraction):
+        options = []
+        result = search("topanime")
+        for n in result.keys():
+            options.append(disnake.SelectOption(label=n))
+        a = list(result.keys())[0]
+        select_menu = disnake.ui.Select(options=options, placeholder="Results")
+        embed = embeder(result, a, "anime")
+
+        async def calback(interaction):
+            nam = select_menu.values[0]
+            embed = embeder(result, nam, "anime")
+            await interaction.response.edit_message(embed=embed, view=view)
+
+        select_menu.callback = calback
+        view = disnake.ui.View()
+        view.add_item(select_menu)
+        await ctx.send(embed=embed, view=view)
+        
+    @commands.slash_command(description="Search the top Manga")
+    async def top_manga(ctx: disnake.ApplicationCommandInteraction):
+        options = []
+        result = search("topmanga")
+        for n in result.keys():
+            options.append(disnake.SelectOption(label=n))
+        a = list(result.keys())[0]
+        select_menu = disnake.ui.Select(options=options, placeholder="Results")
         embed = embeder(result, a)
 
         async def calback(interaction):
             nam = select_menu.values[0]
             embed = embeder(result, nam)
             await interaction.response.edit_message(embed=embed, view=view)
-            
+
         select_menu.callback = calback
         view = disnake.ui.View()
         view.add_item(select_menu)
