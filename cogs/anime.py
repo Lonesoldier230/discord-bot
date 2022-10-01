@@ -66,7 +66,7 @@ class Anime(commands.Cog):
     def __init__(self,client):
         self.client = client
     
-    @commands.slash_command()
+    @commands.slash_command(description="Search any Manga you like")
     async def manga_search(ctx:disnake.ApplicationCommandInteraction,name):
         options = []
         result = search("manga", name)
@@ -86,7 +86,7 @@ class Anime(commands.Cog):
         view.add_item(select_menu)
         await ctx.send(embed = embed,view=view)
         
-    @commands.slash_command()
+    @commands.slash_command(description="Search any Anime you like")
     async def anime_search(ctx: disnake.ApplicationCommandInteraction, name):
         options = []
         result = search("anime", name)
