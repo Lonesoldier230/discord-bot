@@ -2,7 +2,6 @@ import disnake
 from disnake.ext import commands  
 import requests
 import json
-#!make it look and flexible
 
 def search(type,name):
     if type == "anime":
