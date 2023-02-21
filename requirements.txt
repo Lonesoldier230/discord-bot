@@ -1,7 +1,5 @@
-discord==1.7.3
-discord.py==1.7.3
-Flask==2.0.2
-google==3.0.0
-requests==2.26.0
-wikipedia==1.4.0
-python-dotenv==0.19.1
+discord == 1.7.3
+discord.py == 1.7.3
+discord-py-slash-command  == 4.2.1
+disnake == 2.5.2
+requests== 2.26.0
