@@ -26,7 +26,7 @@ def color():
 
 
 backup_data = {"TOKEN": None, "8ball": True, "Custom_commands": {"hello": "hi how are you"}, "kick_settings": {"kick": True, "text": "[admin] kicked [member]"}, "ban_settings": {"ban": True, "text": "[admin] banned [member]"}, "unban_settings": {"unban": True, "text": "[admin] unbanned [member]"}, "role_settings": {
-    "role": True, "text": "[admin] has roled [member]"}, "unrole_settings": {"unrole": True, "text": "[admin] has unroled [member]"}, "mute_settings": {"mute": True, "text": "[member] has been muted by [admin]"}, "unmute_settings": {"unmute": True, "text": "[member] has been unmuted by [admin]"}, "insult": ["people clap when they see you.They clap their hands over their eyes.,you are proof that god has a sense of humour.", "you sir are the reason god created the middle finger."], "who_is": True, "randomn": True, "wikipedia": True, "google_search": True, "banned_words": [""], "banned_sites": [""]}
+    "role": True, "text": "[admin] has roled [member]"}, "unrole_settings": {"unrole": True, "text": "[admin] has unroled [member]"}, "mute_settings": {"mute": True, "text": "[member] has been muted by [admin]"}, "unmute_settings": {"unmute": True, "text": "[member] has been unmuted by [admin]"}, "banned_words": [""], "banned_sites": [""]}
 
 # most essential program it finds where this file is located and changes dir here
 path1 = __file__.replace('main.py', '')

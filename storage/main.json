@@ -32,15 +32,6 @@
         "unmute": true,
         "text": "[member] has been unmuted by [admin]"
     },
-    "insult": [
-        "people clap when they see you.They clap their hands over their eyes.",
-        "you are proof that god has a sense of humour.",
-        "you sir are the reason god created the middle finger."
-    ],
-    "who_is": true,
-    "randomn": true,
-    "wikipedia": true,
-    "google_search": true,
     "banned_words": [
         "fuck",
         "bitch"
