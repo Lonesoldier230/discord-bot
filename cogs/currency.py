@@ -9,17 +9,6 @@ with open("./storage/balance.json", "r") as bal:
 with open("./storage/work.json","r") as work:
     work = json.load(work)
 
-
-def proper_comma(number):
-    main = str(number)
-    main_len = len(main)/3
-    i = 1
-    b = 0
-    while i <= main_len:
-        main = main[:-3*i-b] + "," + main[-3*i-b:]
-        i += 1
-        b += 1
-    return main
 def color():
     # this program choose colors for the embed randomly
     color = (0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694, 0x9b59b6, 0x71368a, 0xe91e63, 0xad1457, 0xf1c40f,
@@ -38,7 +27,7 @@ class currency(commands.Cog):
             if str(ctx.author.id) in bal.keys():
                 cash = bal[str(ctx.author.id)]["cash"]
                 bank = bal[str(ctx.author.id)]["bank"]
-                embed = disnake.Embed(title="Balance",color = color(),description=f"**Cash:**⏣ {cash}\n**Bank:**⏣ {bank}")
+                embed = disnake.Embed(title="Balance",color = color(),description=f"**Cash:**⏣ {cash:,}\n**Bank:**⏣ {bank:,}")
                 embed.set_footer(text=f"{ctx.author.name}#{ctx.author.discriminator}'s balance")
                 await ctx.response.send_message(embed=embed) 
             else:
@@ -52,7 +41,7 @@ class currency(commands.Cog):
             if str(user.id) in bal.keys():
                 cash = bal[str(user.id)]["cash"]
                 bank = bal[str(user.id)]["bank"]
-                embed = disnake.Embed(title="Balance", color=color(), description=f"**Cash:**⏣ {cash}\n**Bank:**⏣ {bank}")
+                embed = disnake.Embed(title="Balance", color=color(), description=f"**Cash:**⏣ {cash:,}\n**Bank:**⏣ {bank:,}")
                 embed.set_footer(text=f"{user.name}#{user.discriminator}'s balance")
                 await ctx.response.send_message(embed=embed)
             else:
@@ -68,12 +57,12 @@ class currency(commands.Cog):
     async def work(ctx:disnake.ApplicationCommandInteraction):
         if str(ctx.author.id) in work:
             salary = work[str(ctx.author.id)]["salary"]
-            bal[str(ctx.author.id)]["cash"] = proper_comma(int(bal[str(ctx.author.id)]["cash"].replace(",",""))+salary)
+            bal[str(ctx.author.id)]["cash"] = bal[str(ctx.author.id)]["cash"]+salary
             
             with open("./storage/balance.json","w") as wrk:
                 json.dump(bal,wrk,indent = 4)
                 
-            embed = disnake.Embed(title = "Work",color = color(),description = f"you earned {proper_comma(salary)}")
+            embed = disnake.Embed(title = "Work",color = color(),description = f"you earned {salary:,}")
             await ctx.response.send_message(embed = embed)
         else:
             embed = disnake.Embed(title = "Work",color = color(),description=":x: you dont have a job currently")
