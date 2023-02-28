@@ -1,6 +1,7 @@
 import disnake
 import json
 import random
+import time
 import asyncio
 from disnake.ext import commands
 
@@ -56,14 +57,20 @@ class currency(commands.Cog):
     @commands.slash_command()
     async def work(ctx:disnake.ApplicationCommandInteraction):
         if str(ctx.author.id) in work:
-            salary = work[str(ctx.author.id)]["salary"]
-            bal[str(ctx.author.id)]["cash"] = bal[str(ctx.author.id)]["cash"]+salary
-            
-            with open("./storage/balance.json","w") as wrk:
-                json.dump(bal,wrk,indent = 4)
+            duration = time.time() - bal[str(ctx.author.id)]["time"]
+            if duration > 30.00:
+                salary = work[str(ctx.author.id)]["salary"]
+                bal[str(ctx.author.id)]["cash"] = bal[str(ctx.author.id)]["cash"]+salary
+                bal[str(ctx.author.id)]["time"] = time.time()
+                with open("./storage/balance.json","w") as wrk:
+                    json.dump(bal,wrk,indent = 4)
+                    
+                embed = disnake.Embed(title = "Work",color = color(),description = f"you earned {salary:,}")
+                await ctx.response.send_message(embed = embed)
+            else:
+                embed = disnake.Embed(title="Work", color=color(), description=f"please wait for {30 - int(duration)}")
+                await ctx.response.send_message(embed=embed)
                 
-            embed = disnake.Embed(title = "Work",color = color(),description = f"you earned {salary:,}")
-            await ctx.response.send_message(embed = embed)
         else:
             embed = disnake.Embed(title = "Work",color = color(),description=":x: you dont have a job currently")
             
