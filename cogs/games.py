@@ -3,10 +3,9 @@ from disnake.ext import commands
 import json
 import random
 from modules.general import color
+from modules.general import file_open
 
-
-with open('./storage/main.json', 'r') as js:
-    data = json.load(js)
+data = file_open('./storage/main.json')
 
 class games(commands.Cog):
     

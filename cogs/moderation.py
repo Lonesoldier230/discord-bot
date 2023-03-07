@@ -5,15 +5,14 @@ import random
 import asyncio
 from disnake.ext import commands
 from modules.general import color
+from modules.general import file_open
 
 prefi = "/"
 
-with open('./storage/main.json', 'r') as js:
-    data = json.load(js)
+data = file_open('./storage/main.json')
             
 try:
-    with open("./storage/mute_role.json", "r") as mrj:
-        Mute_roles = json.load(mrj)
+    Mute_roles = file_open("./storage/mute_role.json")
 except:
     print("hey dont mess with mute_role.json")
     

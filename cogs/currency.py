@@ -5,11 +5,10 @@ import time
 import asyncio
 from disnake.ext import commands
 from modules.general import color
+from modules.general import file_open
 
-with open("./storage/balance.json", "r") as bal:
-    bal = json.load(bal)
-with open("./storage/work.json","r") as work:
-    work = json.load(work)
+bal = file_open("./storage/balance.json")
+work = file_open("./storage/work.json")
 
 class currency(commands.Cog):
     

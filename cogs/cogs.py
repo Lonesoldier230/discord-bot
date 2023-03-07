@@ -1,10 +1,11 @@
 import json
 import disnake
 from disnake.ext import commands
+from modules.general import file_open
+
 path = __file__.replace("/cogs/cogs.py","")
 
-with open(f'{path}/storage/main.json', 'r') as js:
-  data = json.load(js)
+data = file_open(f'{path}/storage/main.json')
   
 class Example(commands.Cog):
 

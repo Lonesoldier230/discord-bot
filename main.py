@@ -9,6 +9,7 @@ import json
 from json.decoder import JSONDecodeError
 import time
 from modules.general import color
+from modules.general import file_open
 #from dotenv import load_dotenv
 # load_dotenv()
 #from keep_alive import keep_alive
@@ -33,9 +34,7 @@ for i in range(3):
     configurater = {0: "you made an error in main.json you have 60 seconds",
                     1: "can you check main.json again you have 60 seconds"}
     try:
-        with open('./storage/main.json', 'r') as js:
-            data = json.load(js)
-            break
+        data = file_open('./storage/main.json')
     except JSONDecodeError as e:
         if i < 2:
             print(configurater[i])
@@ -60,8 +59,7 @@ if data["TOKEN"] == None:
     exit()
 
 try:
-    with open("./storage/mute_role.json", "r") as mrj:
-        Mute_roles = json.load(mrj)
+    Mute_roles = file_open("./storage/mute_role.json")
 except:
     print("hey dont mess with mute_role.json")
 
