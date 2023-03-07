@@ -13,7 +13,7 @@ def file_open(file_name):
         with open(file_name,"r") as txt:
             return txt.read()
     elif file_name.endswith(".json"):
-        with open(file_name , "w") as js:
+        with open(file_name , "r") as js:
             return json.load(js)
     else:
         raise ValueError
