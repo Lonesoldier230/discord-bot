@@ -1,7 +1,6 @@
 import disnake
 import json
 import os
-import random
 import asyncio
 from disnake.ext import commands
 from modules.general import color

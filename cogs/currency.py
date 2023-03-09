@@ -6,6 +6,7 @@ import asyncio
 from disnake.ext import commands
 from modules.general import color
 from modules.general import file_open
+from modules.shop import embeder
 
 bal = file_open("./storage/balance.json")
 work = file_open("./storage/work.json")
@@ -67,5 +68,54 @@ class currency(commands.Cog):
         else:
             embed = disnake.Embed(title = "Work",color = color(),description=":x: you dont have a job currently")
             
+    @commands.slash_command(description= "to look for products to buy")
+    async def shop(ctx:disnake.ApplicationCommandInteraction):
+        embed = embeder(ctx)
+        nam = "all"
+        shop_items = file_open("./storage/shop_items.json")
+        number = 0
+        
+        async def callback_select(interactions):
+            nam = select_menu.values[0]            
+            embed = embeder(ctx,nam)
+            number = 0  
+            await interactions.response.edit_message(embed = embed,view = view)
+            
+        async def callback_button1(interactions):
+            number += 1
+            embed = embeder(ctx,number = number)
+            await interactions.response.edit_message(embed=embed, view=view)
+            button2.disabled = False
+            if len(list(shop_items[nam].keys())) < 10+10*number:
+                button1.disabled = True
+            
+            
+        async def callback_button2(interactions):
+            number -= 1
+            embed = embeder(ctx, number=number)
+            button1.disabled = False
+            if len(list(shop_items[nam].keys())) < 10+10*number:
+                button2.disabled = True
+            await interactions.response.edit_message(embed=embed, view=view)
+        
+        options = []
+        for n in shop_items.keys():
+            options.append(disnake.SelectOption(label=n))
+        select_menu = disnake.ui.Select(options=options,placeholder="Results")
+        button1 = disnake.ui.button(label="<", style=disnake.ButtonStyle.primary)
+        button2 = disnake.ui.button(label=">", style=disnake.ButtonStyle.primary)
+        
+        select_menu.callback = callback_select
+        button1.callback = callback_button1
+        button1.disabled = True
+        button2.callback = callback_button2
+        
+        view = disnake.ui.View()
+        view.add_item(select_menu)
+        view.add_item(button1)
+        view.add_item(button2)
+        
+        await ctx.send(embed=embed, view=view)
+        
 def setup(client):
     client.add_cog(currency(client))

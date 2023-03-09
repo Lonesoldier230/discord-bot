@@ -1,0 +1,64 @@
+{
+    "all":{
+        "keyboard": {
+            "description": "to type things",
+            "emoji": ":keyboard:",
+            "price": 100,
+            "stock_no": null
+        },
+        "mouse": {
+            "description": "to click things",
+            "emoji": ":mouse:",
+            "price": 100,
+            "stock_no": null
+        },
+        "iron": {
+            "description": "",
+            "emoji": ":iron:",
+            "price": 100,
+            "stock_no": 50
+        },
+        "golden ring": {
+            "description": "literally does nothing",
+            "emoji": ":golden_ring:",
+            "price": 1500000,
+            "stock_no": null
+        }
+    },
+
+
+    "item":{
+        "keyboard":{
+            "description":"to type things",
+            "emoji":":keyboard:",
+            "price":100,
+            "stock_no":null
+        },
+        "mouse":{
+            "description":"to click things",
+            "emoji":":mouse:",
+            "price":100,
+            "stock_no":null
+        }
+    },
+
+
+    "resources":{
+        "iron":{
+            "description":"",
+            "emoji":":iron:",
+            "price":100,
+            "stock_no":50
+        }
+    },
+
+    
+    "collectable":{
+        "golden ring":{
+            "description":"literally does nothing",
+            "emoji":":golden_ring:",
+            "price":1500000,
+            "stock_no":null
+        }
+    }
+}
