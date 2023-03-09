@@ -102,8 +102,8 @@ class currency(commands.Cog):
         for n in shop_items.keys():
             options.append(disnake.SelectOption(label=n))
         select_menu = disnake.ui.Select(options=options,placeholder="Results")
-        button1 = disnake.ui.button(label="<", style=disnake.ButtonStyle.primary)
-        button2 = disnake.ui.button(label=">", style=disnake.ButtonStyle.primary)
+        button1 = disnake.ui.Button(label="<", style=disnake.ButtonStyle.primary)
+        button2 = disnake.ui.Button(label=">", style=disnake.ButtonStyle.primary)
         
         select_menu.callback = callback_select
         button1.callback = callback_button1

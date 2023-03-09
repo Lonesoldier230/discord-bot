@@ -12,12 +12,12 @@ def embeder(ctx,cat:str = "all",number:int = 0):
             
     for i in range(num1,num2):
         item_name = list(shop_items[cat].keys())[i]
-        stock_no = shop_items[cat][i]["stock_no"]
-        price = shop_items[cat][i]["price"]
-        description = shop_items[cat][i]["description"]
-        emoji = shop_items[cat][i]["emoji"]
+        stock_no = shop_items[cat][item_name]["stock_no"]
+        price = shop_items[cat][item_name]["price"]
+        description = shop_items[cat][item_name]["description"]
+        emoji = shop_items[cat][item_name]["emoji"]
                 
-        embed.add_field(name=f"{emoji} {item_name}({stock_no}):{price}", value=description, inline=True)
+        embed.add_field(name=f"{emoji} {item_name}({stock_no}):{price}", value=description, inline=False)
     embed.set_footer(text=f"#{id}")
     
     return embed
