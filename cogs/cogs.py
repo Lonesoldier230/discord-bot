@@ -1,4 +1,3 @@
-import json
 import disnake
 from disnake.ext import commands
 from modules.general import file_open
