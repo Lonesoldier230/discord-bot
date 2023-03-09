@@ -1,6 +1,5 @@
 import disnake
 from disnake.ext import commands
-import json
 import random
 from modules.general import color
 from modules.general import file_open

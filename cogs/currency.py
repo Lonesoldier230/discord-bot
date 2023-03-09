@@ -1,8 +1,6 @@
 import disnake
 import json
-import random
 import time
-import asyncio
 from disnake.ext import commands
 from modules.general import color
 from modules.general import file_open

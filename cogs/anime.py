@@ -1,7 +1,6 @@
 import disnake
 from disnake.ext import commands  
 import requests
-import random
 import json
 from modules.general import color
 
