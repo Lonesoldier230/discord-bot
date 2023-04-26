@@ -66,7 +66,7 @@ except:
 
 # this is the brain of the bot
 client = commands.Bot(
-    command_prefix=disnake.ext.commands.when_mentioned, test_guilds=[914533847343980584])
+    command_prefix=disnake.ext.commands.when_mentioned, )
 prefi = "/"
 # body
 
