@@ -4,7 +4,7 @@ import time
 from disnake.ext import commands
 from modules.general import color
 from modules.general import file_open
-from modules.shop import embeder
+from modules.shop import embeder , shop_embed
 
 bal = file_open("./storage/balance.json")
 work = file_open("./storage/work.json")
@@ -72,15 +72,16 @@ class currency(commands.Cog):
         nam = "all"
         shop_items = file_open("./storage/shop_items.json")
         number = 0
+        num_add_func = shop_embed()
         
         async def callback_select(interactions):
             nam = select_menu.values[0]            
             embed = embeder(ctx,nam)
-            number = 0  
+            number = num_add_func.set_num()
             await interactions.response.edit_message(embed = embed,view = view)
             
         async def callback_button1(interactions):
-            number += 1
+            number = num_add_func.add_number()
             embed = embeder(ctx,number = number)
             await interactions.response.edit_message(embed=embed, view=view)
             button2.disabled = False
@@ -89,7 +90,7 @@ class currency(commands.Cog):
             
             
         async def callback_button2(interactions):
-            number -= 1
+            number -= num_add_func.sub_number()
             embed = embeder(ctx, number=number)
             button1.disabled = False
             if len(list(shop_items[nam].keys())) < 10+10*number:

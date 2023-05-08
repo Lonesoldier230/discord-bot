@@ -21,3 +21,20 @@ def embeder(ctx,cat:str = "all",number:int = 0):
     embed.set_footer(text=f"#{id}")
     
     return embed
+
+
+class shop_embed:
+    def __init__(self):
+        self.number = 0
+
+    def add_number(self, num: int = 1):
+        self.a += num
+        return self.number
+
+    def sub_number(self, num: int = 1):
+        self.a -= num
+        return self.number
+
+    def set_num(self, num: int = 0):
+        self.a = 0
+        return self.number
